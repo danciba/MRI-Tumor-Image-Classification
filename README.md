@@ -1,135 +1,125 @@
-# Brain MRI Tumor Detection
+# MRI-Tumor-Image-Classification
 
-This project demonstrates the use of deep learning to classify brain MRI images as indicating the presence or absence of a tumor. It uses a fine-tuned ResNet50 model and custom data preprocessing to achieve accurate predictions. The dataset is sourced from Kaggle and consists of labeled MRI images categorized into "Tumor" and "No Tumor" classes.
-
----
-
-## Project Structure
-
-```
-Brain-MRI-Tumor-Detection/
-|-- data/                    # Directory for the dataset
-|-- scripts/                 # Python scripts for training, evaluation, and utilities
-|-- models/                  # Saved trained models
-|-- README.md                # Project documentation
-|-- requirements.txt         # Python dependencies
-|-- train_model.py           # Main script for training the model
-|-- evaluate_model.py        # Script for evaluating the trained model
-|-- visualize_results.py     # Script for visualizing predictions and performance metrics
-```
-
----
+This project implements a deep learning model for the classification of brain tumor images using the **EfficientNetB0** architecture, with custom data augmentation and preprocessing. The dataset is sourced from Kaggle's [Brain MRI Images for Brain Tumor Detection](https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection).
 
 ## Features
+- **Model**: Transfer learning with EfficientNetB0.
+- **Augmentation**: Custom data augmentation with TensorFlow.
+- **Loss Function**: Focal loss to handle class imbalances.
+- **Metrics**: Accuracy, Precision, Recall, and AUC.
+- **Evaluation**: Classification report and confusion matrix for test data.
 
-- **Dataset Handling**: Automated download and organization of the dataset.
-- **Data Augmentation**: Preprocessing pipeline includes augmentation techniques like flipping, brightness adjustment, and contrast adjustment.
-- **Model Training**: Fine-tuning ResNet50 for binary classification.
-- **Custom Generators**: Custom `Sequence`-based data generator for efficient data loading and augmentation.
-- **Evaluation**: Metrics such as accuracy, loss, confusion matrix, and classification report.
-- **Visualization**: Displays predictions, training history, and confusion matrix.
+---
+
+## Dataset
+The dataset contains MRI images labeled as:
+- `yes`: Images showing a brain tumor.
+- `no`: Images without a brain tumor.
+
+The dataset is split into:
+- **Training Set**: 80% of data.
+- **Validation Set**: 10% of data.
+- **Test Set**: 10% of data.
 
 ---
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/Brain-MRI-Tumor-Detection.git
-   cd Brain-MRI-Tumor-Detection
-   ```
+### Prerequisites
+Ensure you have Python 3.12+ installed.
 
-2. Install the dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Clone the Repository
+```bash
+git clone https://github.com/danciba/MRI-Tumor-Image-Classification.git
+cd MRI-Tumor-Image-Classification
+```
 
-3. (Optional) Use Docker:
-   ```bash
-   docker build -t brain-mri-tumor-detection .
-   docker run -it brain-mri-tumor-detection
-   ```
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Kaggle API
+To download the dataset, set up the Kaggle API:
+1. Create an account on [Kaggle](https://www.kaggle.com/).
+2. Generate an API token from your account settings.
+3. Place the downloaded `kaggle.json` file in `~/.kaggle/`.
 
 ---
 
 ## Usage
 
-### Dataset Preparation
-
-The dataset will be automatically downloaded and organized when you run the training script. Ensure your Kaggle API credentials are set up.
-
 ### Train the Model
-
-Run the following command to train the model:
+Run the Python script to train the model:
 ```bash
-python train_model.py
+MRI-Tumor-Image-Classification.py
 ```
 
-### Evaluate the Model
-
-To evaluate the trained model on the test set:
-```bash
-python evaluate_model.py
-```
-
-### Visualize Results
-
-To display predictions and metrics:
-```bash
-python visualize_results.py
-```
+### Test the Model
+Modify the script to evaluate the test set (refer to the `test` section in the code).
 
 ---
 
 ## Results
 
-- **Validation Accuracy**: ~XX%  
-- **Test Accuracy**: ~XX%  
+### Validation Set
+- **Validation Loss**: 1.6621
+- **Validation Accuracy**: 0.9200
+- **Validation Precision**: 0.9333
+- **Validation Recall**: 0.9333
+- **Validation AUC**: 0.9933
 
-### Example Predictions
+However, the confusion matrix for the validation set revealed some inconsistencies:
+```
+              precision    recall  f1-score   support
 
-| Actual       | Predicted    | Image                              |
-|--------------|--------------|------------------------------------|
-| Tumor        | Tumor        | ![Example1](path/to/image1.png)   |
-| No Tumor     | Tumor        | ![Example2](path/to/image2.png)   |
+           0       0.40      0.40      0.40        10
+           1       0.60      0.60      0.60        15
+
+    accuracy                           0.52        25
+   macro avg       0.50      0.50      0.50        25
+weighted avg       0.52      0.52      0.52        25
+```
+
+### Test Set
+- **Test Loss**: 1.6662
+- **Test Accuracy**: 0.8462
+- **Test Precision**: 0.8333
+- **Test Recall**: 0.9375
+- **Test AUC**: 0.9469
+
+The confusion matrix for the test set showed:
+```
+              precision    recall  f1-score   support
+
+           0       0.50      0.40      0.44        10
+           1       0.67      0.75      0.71        16
+
+    accuracy                           0.62        26
+   macro avg       0.58      0.57      0.58        26
+weighted avg       0.60      0.62      0.61        26
+```
+
+These results indicate that while the overall accuracy metrics appear high, the confusion matrices highlight performance issues in classifying the individual classes, particularly for the minority class.
 
 ---
 
-## Dataset
-
-The dataset is sourced from [Kaggle](https://www.kaggle.com/navoneel/brain-mri-images-for-brain-tumor-detection). It consists of two categories:
-
-- **Yes**: MRI images with brain tumors.
-- **No**: MRI images without brain tumors.
-
----
-
-## Model Architecture
-
-- **Base Model**: Pre-trained ResNet50 with weights from ImageNet.
-- **Custom Head**:
-  - GlobalAveragePooling2D layer
-  - Dense layer with 256 units and ReLU activation
-  - Dropout layer with a rate of 0.5
-  - Final Dense layer with sigmoid activation
+## File Structure
+```
+MRI-Tumor-Image-Classification/
+├── brain_tumor_detection.py   # Main Python script
+├── requirements.txt           # Dependencies
+├── README.md                  # Project documentation
+└── .gitignore                 # Git ignore file
+```
 
 ---
 
-## Contributions
-
-Contributions are welcome! If you'd like to add features or fix bugs, feel free to submit a pull request.
+## Acknowledgements
+- [Kaggle - Brain MRI Images for Brain Tumor Detection](https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection)
+- TensorFlow and Keras documentation.
 
 ---
 
 ## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Acknowledgments
-
-- The dataset creators on Kaggle.
-- TensorFlow and Keras for the deep learning framework.
-- Scikit-learn for metrics and utilities.
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

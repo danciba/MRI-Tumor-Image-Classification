@@ -1,0 +1,7 @@
+tensorflow==2.18.0         # Deep learning framework for model training
+numpy==1.26.4              # Numerical operations
+opencv-python==4.10.0.84   # Image processing (cv2)
+scikit-learn==1.4.2        # Classification metrics and model evaluation
+kagglehub==0.3.6           # For downloading datasets from Kaggle
+matplotlib==3.8.4          # For plotting graphs and confusion matrix
+scipy==1.13.1              # For image rotation (scipy.ndimage.rotate)
