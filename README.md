@@ -23,6 +23,19 @@ The dataset is split into:
 
 ---
 
+## Preprocessing
+The preprocessing pipeline applied to the images includes:
+
+1. **Resizing**: All images are resized to `(224, 224)` to match the input requirements of EfficientNetB0.
+2. **Normalization**: Pixel values are normalized using the `tf.keras.applications.efficientnet.preprocess_input` function, which scales the input to the range expected by EfficientNet.
+3. **Random Augmentation**: 
+   - **Random Horizontal Flip**: Images are flipped horizontally with a probability of 50%.
+   - **Random Vertical Flip**: Images are flipped vertically with a probability of 50%.
+
+During training, the applied augmentations are randomly selected for each image, providing variability in the training data. The preprocessing transformations ensure the model can generalize better to unseen data by introducing variations in the input.
+
+---
+
 ## Installation
 
 ### Prerequisites
@@ -52,7 +65,7 @@ To download the dataset, set up the Kaggle API:
 ### Train the Model
 Run the Python script to train the model:
 ```bash
-MRI-Tumor-Image-Classification.py
+python MRI-Tumor-Image-Classification.py
 ```
 
 ### Test the Model
@@ -92,12 +105,12 @@ The confusion matrix for the test set showed:
 ```
               precision    recall  f1-score   support
 
-           0       0.50      0.40      0.44        10
-           1       0.67      0.75      0.71        16
+           0       0.88      0.70      0.78        10
+           1       0.83      0.94      0.88        16
 
-    accuracy                           0.62        26
-   macro avg       0.58      0.57      0.58        26
-weighted avg       0.60      0.62      0.61        26
+    accuracy                           0.85        26
+   macro avg       0.85      0.82      0.83        26
+weighted avg       0.85      0.85      0.84        26
 ```
 
 These results indicate that while the overall accuracy metrics appear high, the confusion matrices highlight performance issues in classifying the individual classes, particularly for the minority class.
@@ -107,10 +120,10 @@ These results indicate that while the overall accuracy metrics appear high, the 
 ## File Structure
 ```
 MRI-Tumor-Image-Classification/
-├── brain_tumor_detection.py   # Main Python script
-├── requirements.txt           # Dependencies
-├── README.md                  # Project documentation
-└── .gitignore                 # Git ignore file
+├── MRI-Tumor-Image-Classification.py   # Main Python script
+├── requirements.txt                    # Dependencies
+├── README.md                           # Project documentation
+└── .gitignore                          # Git ignore file
 ```
 
 ---
