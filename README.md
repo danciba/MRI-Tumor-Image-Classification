@@ -120,10 +120,12 @@ These results indicate that while the overall accuracy metrics appear high, the 
 ## File Structure
 ```
 MRI-Tumor-Image-Classification/
-├── MRI-Tumor-Image-Classification.py   # Main Python script
-├── requirements.txt                    # Dependencies
+├──.gitattributes                       # Git ignore file
+├── LICENSE                             # License Project
+├── MRI-Tumor-Image-Classification.py   # Main Python scrip
+├── Preprocess Example Images,png       # Peprocess Example Images
 ├── README.md                           # Project documentation
-└── .gitignore                          # Git ignore file
+└── requirements.txt                    # Dependencies
 ```
 
 ---
