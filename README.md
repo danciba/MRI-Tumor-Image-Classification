@@ -123,7 +123,7 @@ MRI-Tumor-Image-Classification/
 ├──.gitattributes                       # Git ignore file
 ├── LICENSE                             # License Project
 ├── MRI-Tumor-Image-Classification.py   # Main Python scrip
-├── Preprocess Example Images,png       # Peprocess Example Images
+├── Preprocess Example Images.png       # Peprocess Example Images
 ├── README.md                           # Project documentation
 └── requirements.txt                    # Dependencies
 ```
@@ -138,15 +138,3 @@ MRI-Tumor-Image-Classification/
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Project Files
-
-| File Name                          | Description                                   |
-|------------------------------------|-----------------------------------------------|
-| `.gitattributes`                   | Configuration for Git repository attributes   |
-| `LICENSE`                          | License information for the project           |
-| `MRI-Tumor-Image-Classification.py`| Main script for MRI tumor classification      |
-| `Preprocess Example Images.png`    | Example of preprocessed images for the model |
-| `README.md`                        | Project overview and instructions             |
-| `requirements.txt`                 | List of dependencies and libraries used       |
-
